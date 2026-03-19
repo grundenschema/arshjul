@@ -1,0 +1,25 @@
+{
+  "name": "Grundens årshjul",
+  "short_name": "Årshjul",
+  "lang": "sv",
+  "start_url": "/arshjul/index.html",
+  "scope": "/arshjul/",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#f5f7fb",
+  "description": "Aktiviteter per månad",
+  "icons": [
+    {
+      "src": "/arshjul/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/arshjul/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
