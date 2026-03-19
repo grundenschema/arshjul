@@ -8,9 +8,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Årshjul" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" href="./icons/icon-192.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="manifest" href="/arshjul/manifest.webmanifest" />
+  <link rel="icon" href="/arshjul/icons/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/arshjul/icons/icon-192.png" />
   <style>
     :root{--bg:#f5f7fb;--text:rgba(15,23,42,0.92);--muted:rgba(15,23,42,0.62);--border:rgba(15,23,42,0.12);--shadow:0 14px 42px rgba(15,23,42,0.10);--radius:18px}
     *{box-sizing:border-box}
@@ -176,9 +176,8 @@
     document.addEventListener("keydown",(e)=>{ if(e.key==="Escape"&&els.modalBackdrop.getAttribute("aria-hidden")==="false") closeModal(); if(e.key==="Escape"&&els.printModalBackdrop.getAttribute("aria-hidden")==="false") closePrintModal(); });
     els.addForm.addEventListener("submit", async (e)=>{ e.preventDefault(); const m=(els.fMonth.value||"").trim(); const monthNum=Number(m); if(!Number.isFinite(monthNum)||monthNum<1||monthNum>12){ els.saveStatus.textContent="Välj en giltig månad."; return; } const payload={ row:Number(els.fRow.value||0)||0, manad:monthNum, rubrik:(els.fTitle.value||"").trim(), datum:(els.fDate.value||"").trim(), beskrivning:(els.fDesc.value||"").trim(), plats:(els.fPlace.value||"").trim(), kategori:(els.fCat.value||"").trim() }; if(!payload.rubrik){ els.saveStatus.textContent="Rubrik krävs."; return; } try{ const mode=els.fMode.value||"add"; if(mode==="edit"){ if(!payload.row){ els.saveStatus.textContent="Kan inte spara: __row saknas. Ladda om sidan och prova igen."; return; } els.saveStatus.textContent="Sparar ändring…"; await updateActivity(payload); } else { els.saveStatus.textContent="Sparar…"; await addActivity(payload); } els.saveStatus.textContent="Sparat. Uppdaterar…"; await loadData(); closeModal(); selectMonth(monthNum-1); }catch(err){ console.error(err); els.saveStatus.textContent="Kunde inte spara. Kontrollera att webbappen har åtkomst 'Alla'."; } });
   }
-  async function init(){ buildWheel(); wireUI(); populateMonthSelect(); await loadData(); selectMonth(new Date().getMonth()); if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('./sw.js'); }catch(err){ console.error('Service worker kunde inte registreras', err); } } }
+  async function init(){ buildWheel(); wireUI(); populateMonthSelect(); await loadData(); selectMonth(new Date().getMonth()); if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('/arshjul/sw.js'); }catch(err){ console.error('Service worker kunde inte registreras', err); } } }
   init();
 })();
 </script>
 </body></html>
-
